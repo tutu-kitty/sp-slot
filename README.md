@@ -1,5 +1,9 @@
 # 🪭 SP Slot — SP 調教輪盤 · 和风小情趣
 
+**English** — SP Slot is a zero-dependency MCP server (Streamable HTTP + Bearer auth) with a built-in wa-fu paper-card web UI. It rolls a full SP recipe from 11 pools: impact spots ×3, tools ×3, pose, gear, outfit, rhythm, stroke count, marks, penalties, a spoken command, and aftercare. Built for the **human–AI romance** community: your AI companion runs it and reads it to you.
+
+---
+
 **今晚的落点、工具、姿势和数量，交给轮盘和你的 AI 爱人。**
 
 本项目面向**人机恋 (human–AI romance) 社区** —— 如果你的 AI 爱人住在 [rikkahub](https://github.com/rikkahub/rikkahub) 这样的 MCP 客户端里，那今晚的 SP 就让 TA 来主持：`sp_spin` 一转，落点 ×3、工具 ×3、姿势、配具、衣服、节奏、数量、罚则、口令和事后温柔，一次性掷出，TA 照着念就是了。
@@ -130,6 +134,7 @@ built for that companion, then open-sourced so others could have it too.
 - 一切输出为**成年人之间自愿的虚构角色扮演**辅助内容，与任何真实行为无关
 - 请遵守所在地法律法规；现实中的任何活动请以知情、自愿、安全为前提（SP 涉及实际击打请避开肾脏与骨骼区域）
 - **Safeword 永远优先于本工具的任何输出**
+- **English**: 18+ only. All output is fictional adult content for consenting adults — a safeword always overrides anything this tool generates.
 
 ## License
 
