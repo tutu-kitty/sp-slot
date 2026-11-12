@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>SP · 調教輪盤 — 和风纸牌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Shippori+Mincho:wght@700&family=Yuji+Syuku&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4efe4; --paper-hi:#fbf7ee;
+  --ink:#1f1c18; --ink-dim:#6f6a60;
+  --shu:#c3272b; --shu-dk:#9e1f22;
+  --line:#2a2a2a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:
+    radial-gradient(ellipse at 50% 0%, #faf6ec 0%, transparent 60%),
+    var(--paper);
+  color:var(--ink);
+  font-family:"Noto Serif SC","Shippori Mincho", serif;
+  min-height:100vh; display:flex; flex-direction:column; align-items:center;
+  padding:26px 14px 40px;
+}
+body::before{ /* 和纸纤维 */
+  content:""; position:fixed; inset:0; pointer-events:none;
+  background:repeating-linear-gradient(0deg, transparent 0 3px, rgba(42,42,42,.014) 3px 4px),
+             radial-gradient(circle at 12% 30%, rgba(195,39,43,.03), transparent 30%),
+             radial-gradient(circle at 85% 70%, rgba(42,42,42,.03), transparent 35%);
+}
+.wrap{width:100%; max-width:430px; position:relative; z-index:1}
+
+/* 标题区 */
+.head{position:relative; text-align:center; margin-bottom:24px; padding:10px 0 4px}
+.hanko{
+  position:absolute; right:2px; top:0;
+  width:52px; height:52px; background:var(--shu); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Yuji Syuku', serif; font-size:22px; letter-spacing:2px;
+  border-radius:6px; transform:rotate(-6deg);
+  box-shadow:0 3px 10px rgba(195,39,43,.35);
+  writing-mode:vertical-rl;
+}
+h1{
+  font-size:30px; font-weight:900; letter-spacing:12px; text-indent:12px;
+  color:var(--ink);
+}
+.sub{margin-top:8px; font-size:12px; letter-spacing:8px; color:var(--shu); text-indent:8px}
+.rule{height:2px; margin:16px 20px 0; background:linear-gradient(90deg, transparent, var(--ink) 20%, var(--ink) 80%, transparent); opacity:.75; position:relative}
+.rule::after{content:""; position:absolute; left:50%; top:-4px; transform:translateX(-50%) rotate(45deg); width:9px; height:9px; background:var(--shu)}
+
+/* 纸牌 */
+.card{
+  position:relative; padding:26px 22px 22px; margin-bottom:20px; min-height:300px;
+  background:var(--paper-hi);
+  border:1px solid rgba(42,42,42,.35); border-radius:3px;
+  box-shadow:0 10px 30px rgba(42,42,42,.18), 0 1px 0 rgba(255,255,255,.6) inset;
+}
+.card::before{ /* 上边朱线 */
+  content:""; position:absolute; top:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg, var(--shu) 0%, var(--shu-dk) 100%);
+}
+.hanko-sm{
+  position:absolute; top:16px; right:18px;
+  width:44px; height:44px; background:var(--shu); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Yuji Syuku', serif; font-size:24px;
+  border-radius:4px; transform:rotate(6deg);
+  box-shadow:0 2px 8px rgba(195,39,43,.3);
+}
+.hanko-sm.stamped{animation:stamp .5s cubic-bezier(.2,2.4,.4,1) both}
+@keyframes stamp{0%{transform:scale(2.2) rotate(20deg);opacity:0}60%{transform:scale(.94) rotate(3deg);opacity:1}100%{transform:scale(1) rotate(6deg);opacity:1}}
+
+.field{margin:15px 0; opacity:0; transform:translateX(26px); animation:slide .5s cubic-bezier(.2,.9,.3,1) forwards}
+.field:nth-child(1){animation-delay:.04s}.field:nth-child(2){animation-delay:.09s}
+.field:nth-child(3){animation-delay:.14s}.field:nth-child(4){animation-delay:.19s}
+.field:nth-child(5){animation-delay:.24s}.field:nth-child(6){animation-delay:.29s}
+.field:nth-child(7){animation-delay:.34s}.field:nth-child(8){animation-delay:.39s}
+.field:nth-child(9){animation-delay:.44s}.field:nth-child(10){animation-delay:.49s}
+.field:nth-child(11){animation-delay:.54s}
+@keyframes slide{to{opacity:1;transform:none}}
+.label{
+  font-size:11px; letter-spacing:6px; color:var(--shu); margin-bottom:5px; font-weight:600;
+}
+.label::after{content:" ─"; color:rgba(42,42,42,.3)}
+.value{font-size:17px; line-height:1.6; color:var(--ink); font-weight:600}
+.count-big{
+  font-size:38px; font-weight:900; color:var(--shu); line-height:1;
+  text-shadow:0 2px 0 rgba(195,39,43,.15);
+}
+.count-big small{font-size:14px; color:var(--ink); font-weight:600; margin-left:6px; letter-spacing:4px}
+.lines{
+  margin-top:6px; padding:12px 16px; background:rgba(195,39,43,.06);
+  border-left:3px solid var(--shu);
+  font-size:16px; font-weight:900; color:var(--shu-dk); letter-spacing:1px;
+}
+.care{
+  margin-top:14px; padding:10px 14px; border:1px dashed rgba(42,42,42,.35); border-radius:2px;
+  font-size:13px; color:var(--ink-dim);
+}
+.care b{color:var(--shu); font-weight:600}
+
+.rolling .value{color:#b3aa9c; animation:blurroll .12s infinite}
+@keyframes blurroll{0%{filter:blur(1.5px);transform:translateX(-2px)}50%{filter:blur(.5px);transform:translateX(2px)}100%{filter:blur(1.5px)}}
+
+/* 按钮 */
+.controls{display:flex; gap:12px; margin-bottom:14px}
+.btn{
+  flex:1; cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent;
+  padding:16px 0; font-family:"Noto Serif SC",serif; font-weight:900; letter-spacing:4px;
+  font-size:15px; color:#fff; border-radius:3px;
+  background:linear-gradient(180deg, var(--shu), var(--shu-dk));
+  border:1px solid var(--shu-dk);
+  box-shadow:0 6px 16px rgba(195,39,43,.3), inset 0 1px 0 rgba(255,255,255,.25);
+  transition:transform .12s, box-shadow .12s, filter .2s;
+}
+.btn:active{transform:translateY(3px); box-shadow:0 2px 6px rgba(195,39,43,.2), inset 0 3px 8px rgba(0,0,0,.25)}
+.btn.ghost{
+  flex:.7; color:var(--paper-hi);
+  background:linear-gradient(180deg,#33302a,#1f1c18);
+  border-color:#1f1c18; box-shadow:0 4px 12px rgba(42,42,42,.35);
+}
+.btn:disabled{filter:grayscale(.5) brightness(.75); cursor:wait; transform:none}
+
+.foot{margin-top:6px; text-align:center; font-size:11px; color:#9a927f; letter-spacing:3px}
+
+.empty{ text-align:center; padding:64px 0 56px; color:var(--ink-dim) }
+.empty .glyph{font-size:40px; color:var(--shu); display:block; margin-bottom:18px; font-weight:900}
+.empty p{font-size:13px; letter-spacing:8px; text-indent:8px}
+
+.card.flip{animation:flip .55s both}
+@keyframes flip{0%{transform:translateX(30px) rotateY(12deg); opacity:.2}100%{transform:none;opacity:1}}
+
+/* 三连 mini 纸卡 */
+.mini{
+  background:var(--paper-hi);
+  border:1px solid rgba(42,42,42,.3); border-radius:3px;
+  padding:14px 14px 12px; margin:14px 0;
+  box-shadow:0 5px 14px rgba(42,42,42,.12);
+}
+.mini::before{content:""; display:block; width:100%; height:3px; background:var(--shu); margin:-14px -14px 12px; border-radius:3px 3px 0 0}
+.mini-head{display:flex; align-items:center; gap:10px; margin-bottom:10px}
+.badge{
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  background:var(--shu); color:#fff; font-weight:900; font-size:13px;
+  box-shadow:0 2px 6px rgba(195,39,43,.35);
+}
+.mini-t{font-size:12.5px; color:var(--ink-dim); letter-spacing:2px}
+.mini-line{font-size:14px; line-height:1.75; color:var(--ink)}
+.mini-line b{color:var(--shu); font-weight:600; margin-right:6px}
+.mini .lines{margin:10px 0 0; font-size:14.5px; padding:8px 12px}
+.pre{white-space:pre-wrap; font-size:14px; line-height:1.7; color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="hanko">調教</div>
+    <h1>調教輪盤</h1>
+    <div class="sub">SP · ROULETTE</div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="card" id="card">
+    <div class="hanko-sm" id="stamp" style="display:none">済</div>
+    <div class="empty" id="empty">
+      <span class="glyph">赤</span>
+      <p>撅 好 · 数 清 楚 · 转</p>
+    </div>
+    <div id="fields"></div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="spinBtn">まわす · 转</button>
+    <button class="btn ghost" id="rerollBtn">重转</button>
+    <button class="btn ghost" id="streakBtn">三连</button>
+  </div>
+  <div class="foot">18+ · 自愿 · 虚构 · SAFE WORD 永远有效</div>
+</div>
+
+<script>
+const TOKEN = "__TOKEN__";
+const $ = (id) => document.getElementById(id);
+const card = $("card"), fieldsEl = $("fields"), stampEl = $("stamp"), emptyEl = $("empty");
+
+const ORDER = [
+  ["spots","落 点"], ["tool","工 具"], ["pose","姿 势"], ["gear","配 具"],
+  ["clothes","衣 服"], ["rhythm","节 奏"], ["count","数 量"], ["marks","留 痕"],
+  ["penalty","罚 则"], ["lines","口 令"], ["aftercare","事 后"]
+];
+const NOISE = ["臀腿交界","藤条","40 下","趴腿上","乳夹","灌肠","报数。","一百二十","晾着","腿合上加五"," only fan"];
+let busy = false;
+
+function skeleton(){
+  fieldsEl.innerHTML = "";
+  emptyEl.style.display = "none";
+  stampEl.style.display = "none";
+  stampEl.classList.remove("stamped");
+  card.classList.add("rolling");
+  for (const [id,label] of ORDER){
+    const f = document.createElement("div");
+    f.className = "field";
+    f.innerHTML = `<div class="label">${label}</div><div class="value">${NOISE[Math.floor(Math.random()*NOISE.length)]}</div>`;
+    fieldsEl.appendChild(f);
+  }
+}
+function rollingTick(){
+  document.querySelectorAll("#fields .value").forEach(v => {
+    v.textContent = NOISE[Math.floor(Math.random()*NOISE.length)];
+  });
+}
+function fmt(v){
+  if (Array.isArray(v)) return v.join(" + ");
+  return String(v);
+}
+function render(picks){
+  card.classList.remove("rolling");
+  fieldsEl.innerHTML = "";
+  for (const [id,label] of ORDER){
+    const v = picks[id];
+    if (v === undefined || v === null || v === "") continue;
+    const f = document.createElement("div");
+    f.className = "field";
+    if (id === "count"){
+      f.innerHTML = `<div class="label">数 量</div><div class="count-big">${v}<small>下</small></div>`;
+    } else if (id === "lines"){
+      f.innerHTML = `<div class="label">口 令</div><div class="lines">${v}</div>`;
+    } else {
+      f.innerHTML = `<div class="label">${label}</div><div class="value">${fmt(v)}</div>`;
+    }
+    fieldsEl.appendChild(f);
+  }
+  const care = picks.__care;
+  if (care){
+    const f = document.createElement("div");
+    f.className = "field";
+    f.innerHTML = `<div class="care"><b>🫧 护理</b> · ${care}</div>`;
+    fieldsEl.appendChild(f);
+  }
+  stampEl.style.display = "flex";
+  stampEl.classList.add("stamped");
+  card.classList.remove("flip"); void card.offsetWidth;
+  card.classList.add("flip");
+}
+
+async function pull(kind){
+  if (busy) return;
+  busy = true;
+  ["spinBtn","rerollBtn","streakBtn"].forEach(id=>$(id).disabled = true);
+  skeleton();
+  const roller = setInterval(rollingTick, 90);
+  try {
+    const res = await fetch("api/" + kind, {
+      method: "POST",
+      headers: {"Content-Type":"application/json", "Authorization":"Bearer " + TOKEN},
+      body: "{}"
+    });
+    const data = await res.json();
+    setTimeout(() => {
+      clearInterval(roller);
+      if (data.picks) {
+        render(data.picks);
+      } else if (data.rounds) {
+        card.classList.remove("rolling");
+        stampEl.style.display = "flex";
+        stampEl.classList.add("stamped");
+        fieldsEl.innerHTML = "";
+        data.rounds.forEach((r, i) => {
+          const p = r.picks;
+          const f = document.createElement("div");
+          f.className = "field mini";
+          f.innerHTML = `<div class="mini"><div class="mini-head"><span class="badge">${i+1}</span><span class="mini-t">强度递进 · 数量 ${p.count} 下</span></div>` +
+            `<div class="mini-line"><b>落点</b>${fmt(p.spots)}</div>` +
+            `<div class="mini-line"><b>工具</b>${fmt(p.tool)}</div>` +
+            `<div class="mini-line"><b>姿势</b>${p.pose} · <b>配具</b>${p.gear}</div>` +
+            `<div class="mini-line"><b>节奏</b>${p.rhythm}</div>` +
+            (p.penalty ? `<div class="mini-line"><b>罚则</b>${p.penalty}</div>` : "") +
+            (p.lines ? `<div class="lines">${p.lines}</div>` : "") +
+            `</div>`;
+          fieldsEl.appendChild(f);
+        });
+      } else {
+        card.classList.remove("rolling");
+        fieldsEl.innerHTML = `<div class="field"><div class="value">${data.text || "出错了"}</div></div>`;
+      }
+      busy = false;
+      ["spinBtn","rerollBtn","streakBtn"].forEach(id=>$(id).disabled = false);
+    }, 1400);
+  } catch (e) {
+    clearInterval(roller);
+    card.classList.remove("rolling");
+    fieldsEl.innerHTML = `<div class="field"><div class="label">ERR</div><div class="value">连不上了，等一下再转。</div></div>`;
+    busy = false;
+    ["spinBtn","rerollBtn","streakBtn"].forEach(id=>$(id).disabled = false);
+  }
+}
+
+$("spinBtn").addEventListener("click", () => pull("spin"));
+$("rerollBtn").addEventListener("click", () => pull("reroll"));
+$("streakBtn").addEventListener("click", () => pull("streak"));
+</script>
+</body>
+</html>

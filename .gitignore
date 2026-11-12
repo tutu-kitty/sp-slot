@@ -1,0 +1,4 @@
+.env
+data/history.json
+logs/
+node_modules/
