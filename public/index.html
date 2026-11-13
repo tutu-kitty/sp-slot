@@ -258,6 +258,16 @@ async function pull(kind){
       body: "{}"
     });
     const data = await res.json();
+    if (data && data.error) {
+      setTimeout(() => {
+        clearInterval(roller);
+        card.classList.remove("rolling");
+        fieldsEl.innerHTML = `<div class="field"><div class="label">ERR</div><div class="value">${data.error}</div></div>`;
+        busy = false;
+        ["spinBtn","rerollBtn","streakBtn"].forEach(id=>$(id).disabled = false);
+      }, 1400);
+      return;
+    }
     setTimeout(() => {
       clearInterval(roller);
       if (data.picks) {

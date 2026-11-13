@@ -47,3 +47,12 @@ WantedBy=multi-user.target
 - token 生成：`python3 -c 'import secrets; print(secrets.token_urlsafe(32))'`
 - `HOST=0.0.0.0` = 同网络内所有人可访问，token 是唯一的门锁，别用弱 token
 - 18+ 内容，不要把地址和 token 分享出去
+
+### Acceptance check | 部署验收
+
+After deploying, verify before announcing:
+
+- UI page loads via the public URL and source contains no literal `__TOKEN__` placeholder.
+- `POST <public-url>/sp-ui/api/spin` (with Basic auth) returns HTTP 200 with `picks`.
+- Response headers include `Cache-Control: no-store` on the UI page (clients always fetch the latest build).
+- Pressing SPIN in a real browser shows results; a wrong Bearer token shows an ERR bubble (errors are no longer silent).

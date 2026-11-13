@@ -205,6 +205,7 @@ function jsonRes(res, id, obj) {
 }
 
 const server = http.createServer((req, res) => {
+  req.url = (req.url || "").split("?")[0];
   if (req.method === "OPTIONS") {
     res.writeHead(204, {
       "Access-Control-Allow-Origin": "*",
@@ -218,7 +219,7 @@ const server = http.createServer((req, res) => {
     try {
       let html = fs.readFileSync(path.join(__dirname, "public", "index.html"), "utf-8");
       html = html.replace("__TOKEN__", TOKEN);
-      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" });
       return res.end(html);
     } catch {
       res.writeHead(500, { "Content-Type": "text/plain" });
